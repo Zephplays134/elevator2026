@@ -175,6 +175,33 @@
         </div>
     </footer>
 
+    <!-- Chatbot -->
+    <button class="chat-btn" id="chat-btn">&#128172;</button>
+
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <span>&#9875; Carnival Assistant</span>
+            <button id="chat-close">&times;</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="msg bot">
+                Hi! I'm your Carnival Cruise assistant. Ask me about destinations, pricing, onboard activities, or booking!
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+            <button id="chat-send">&#10148;</button>
+        </div>
+        <div class="chat-typing" id="chat-typing">Carnival AI is thinking...</div>
+    </div>
+
+    <!-- Auto-Update Banner -->
+    <div class="update-banner" id="update-banner">
+        <p id="update-msg">&#128260; Update available for <strong>elevator2026</strong>!</p>
+        <button class="btn-small" id="update-refresh">Refresh</button>
+        <button class="btn-close" id="update-close">&times;</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
