@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carnival Cruise Line | Fun for Everyone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-icon">&#9875;</span>
+                <span class="logo-text">Carnival Cruise</span>
+            </div>
+            <nav class="nav" id="nav-menu">
+                <a href="#home">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="#deals">Deals</a>
+                <a href="#onboard">Onboard</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-slides" id="hero-slides">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1600')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581579186913-45ac3e6e6c7b?w=1600')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=1600')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Choose Fun. Choose Carnival.</h1>
+            <p>Explore breathtaking destinations, world-class dining, and non-stop entertainment.</p>
+            <a href="#deals" class="btn btn-primary">View Deals</a>
+        </div>
+        <button class="hero-arrow hero-arrow-left" id="hero-prev">&#10094;</button>
+        <button class="hero-arrow hero-arrow-right" id="hero-next">&#10095;</button>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="search-bar">
+        <div class="container search-form">
+            <div class="search-group">
+                <label>Destination</label>
+                <select id="destination">
+                    <option>Caribbean</option>
+                    <option>Bahamas</option>
+                    <option>Mexico</option>
+                    <option>Alaska</option>
+                    <option>Europe</option>
+                </select>
+            </div>
+            <div class="search-group">
+                <label>Departure</label>
+                <input type="date" id="departure">
+            </div>
+            <div class="search-group">
+                <label>Duration</label>
+                <select id="duration">
+                    <option>3-5 Days</option>
+                    <option>6-9 Days</option>
+                    <option>10+ Days</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" id="search-btn">Search Cruises</button>
+        </div>
+    </section>
+
+    <!-- Destinations -->
+    <section class="section" id="destinations">
+        <div class="container">
+            <h2 class="section-title">Popular Destinations</h2>
+            <p class="section-sub">Set sail to the world's most incredible places.</p>
+            <div class="cards" id="dest-cards"></div>
+        </div>
+    </section>
+
+    <!-- Deals -->
+    <section class="section deals" id="deals">
+        <div class="container">
+            <h2 class="section-title">Current Deals</h2>
+            <p class="section-sub">Limited-time offers you don't want to miss.</p>
+            <div class="cards" id="deals-cards"></div>
+        </div>
+    </section>
+
+    <!-- Onboard -->
+    <section class="section" id="onboard">
+        <div class="container">
+            <h2 class="section-title">Life Onboard</h2>
+            <p class="section-sub">From gourmet dining to Broadway-style shows.</p>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">&#127860;</span>
+                    <h3>World-Class Dining</h3>
+                    <p>20+ restaurants from casual to fine dining.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">&#127916;</span>
+                    <h3>Entertainment</h3>
+                    <p>Broadway shows, comedy clubs, and live music.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">&#127754;</span>
+                    <h3>Pools & Water Parks</h3>
+                    <p>Massive water parks with slides for all ages.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">&#127979;</span>
+                    <h3>Spas & Fitness</h3>
+                    <p>Relax at the spa or stay active at the gym.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Guests Say</h2>
+            <div class="testimonial-slider" id="testimonial-slider">
+                <div class="testimonial active">
+                    <p>"The best vacation we've ever had! The kids loved it and so did we."</p>
+                    <h4>- Sarah & Family</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"Unbelievable service, amazing food, and breathtaking views. Can't wait to go again!"</p>
+                    <h4>- Mike R.</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"From the moment we stepped onboard, everything was perfect. Truly a floating paradise."</p>
+                    <h4>- Jessica T.</h4>
+                </div>
+            </div>
+            <div class="testimonial-dots" id="testimonial-dots"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container footer-inner">
+            <div class="footer-col">
+                <h4>Carnival Cruise Line</h4>
+                <p>Making fun and memorable vacations affordable for everyone since 1972.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">Book a Cruise</a>
+                <a href="#">Manage Booking</a>
+                <a href="#">Check-In</a>
+                <a href="#">Gift Cards</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">FAQ</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Accessibility</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>1-800-CARNIVAL</p>
+                <p>support@carnival.com</p>
+                <p>3655 NW 87th Ave<br>Miami, FL 33178</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Carnival Cruise Line. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
