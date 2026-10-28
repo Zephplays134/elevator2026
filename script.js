@@ -70,13 +70,13 @@ function renderCards(containerId, items, isDeal) {
     container.innerHTML = items
         .map(
             (item) => `
-        <div class="card">
+        <div class="card reveal">
           <div class="card-img" style="background-image: url('${item.img}')"></div>
           <div class="card-body">
             <h3>${item.name}</h3>
             <p>${item.desc}</p>
             ${isDeal
-                    ? `<div class="card-price">${item.price} <span><s>${item.original}</s></span></div>`
+                    ? `<div class="card-price">${item.price}<s>${item.original}</s></div>`
                     : `<div class="card-price">${item.price}</div>`
                 }
           </div>
@@ -92,36 +92,40 @@ renderCards('deals-cards', deals, true);
 // ==================== HERO SLIDER ====================
 
 const slides = document.querySelectorAll('.hero-slide');
-const prevBtn = document.getElementById('hero-prev');
-const nextBtn = document.getElementById('hero-next');
+const heroDots = document.getElementById('hero-dots');
 let currentSlide = 0;
 let slideInterval;
 
+slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', () => {
+        showSlide(i);
+        resetInterval();
+    });
+    heroDots.appendChild(dot);
+});
+
+const heroDotsList = heroDots.querySelectorAll('.dot');
+
 function showSlide(index) {
     slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    heroDotsList.forEach((d, i) => d.classList.toggle('active', i === index));
+    currentSlide = index;
 }
 
 function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
+    showSlide((currentSlide + 1) % slides.length);
 }
 
 function resetInterval() {
     clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 5000);
+    slideInterval = setInterval(nextSlide, 6000);
 }
 
-nextBtn.addEventListener('click', () => { nextSlide();
-    resetInterval(); });
-prevBtn.addEventListener('click', () => { prevSlide();
-    resetInterval(); });
-
-slideInterval = setInterval(nextSlide, 5000);
+slideInterval = setInterval(nextSlide, 6000);
 
 // ==================== TESTIMONIAL SLIDER ====================
 
@@ -141,7 +145,7 @@ testimonials.forEach((_, i) => {
     dotsContainer.appendChild(dot);
 });
 
-const dots = document.querySelectorAll('.dot');
+const dots = dotsContainer.querySelectorAll('.dot');
 
 function showTestimonial(index) {
     testimonials.forEach((t, i) => t.classList.toggle('active', i === index));
@@ -149,17 +153,16 @@ function showTestimonial(index) {
     currentTestimonial = index;
 }
 
-function nextTestimonial() {
-    const next = (currentTestimonial + 1) % testimonials.length;
-    showTestimonial(next);
-}
-
 function resetTestimonialInterval() {
     clearInterval(testimonialInterval);
-    testimonialInterval = setInterval(nextTestimonial, 4000);
+    testimonialInterval = setInterval(() => {
+        showTestimonial((currentTestimonial + 1) % testimonials.length);
+    }, 5000);
 }
 
-testimonialInterval = setInterval(nextTestimonial, 4000);
+testimonialInterval = setInterval(() => {
+    showTestimonial((currentTestimonial + 1) % testimonials.length);
+}, 5000);
 
 // ==================== HAMBURGER MENU ====================
 
@@ -190,15 +193,27 @@ document.getElementById('search-btn').addEventListener('click', () => {
 
 // ==================== SCROLL HEADER ====================
 
-const header = document.querySelector('.header');
+const header = document.getElementById('header');
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(0, 48, 135, 1)';
-    } else {
-        header.style.background = 'rgba(0, 48, 135, 0.95)';
-    }
+    header.classList.toggle('scrolled', window.scrollY > 60);
 });
+
+// ==================== REVEAL ON SCROLL ====================
+
+const revealObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.12 }
+);
+
+document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
 
 // ==================== AUTO-UPDATE MONITOR ====================
 
@@ -249,62 +264,62 @@ setInterval(checkForUpdate, POLL_INTERVAL);
 
 checkForUpdate();
 
-// ==================== CHATBOT ====================
+// ==================== ELEVATOR AI CHATBOT ====================
 
-const CARNIVAL_API = {
+const ELEVATOR_AI = {
     ships: [
-        { name: 'Carnival Mardi Gras', capacity: 5282, year: 2021, img: 'https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=200' },
-        { name: 'Carnival Celebration', capacity: 5282, year: 2022, img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=200' },
-        { name: 'Carnival Horizon', capacity: 3960, year: 2018, img: 'https://images.unsplash.com/photo-1581579186913-45ac3e6e6c7b?w=200' },
-        { name: 'Carnival Panorama', capacity: 3960, year: 2019, img: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=200' },
-        { name: 'Carnival Breeze', capacity: 3690, year: 2012, img: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=200' },
+        { name: 'Carnival Mardi Gras', capacity: 5282, year: 2021 },
+        { name: 'Carnival Celebration', capacity: 5282, year: 2022 },
+        { name: 'Carnival Horizon', capacity: 3960, year: 2018 },
+        { name: 'Carnival Panorama', capacity: 3960, year: 2019 },
+        { name: 'Carnival Breeze', capacity: 3690, year: 2012 },
     ],
     destinations,
     deals,
 };
 
-function callCarnivalAPI(intent, params) {
+// Real-time, keyless, fully free, unlimited, and reliable: Elevator answers
+// instantly from the site's own data, with no API key and no usage limits.
+function callElevatorAI(intent) {
     return new Promise((resolve) => {
-        setTimeout(() => {
-            const lower = intent.toLowerCase();
-            if (lower.includes('ship') || lower.includes('vessel')) {
-                const results = CARNIVAL_API.ships.map(s => `<div class="card-ref"><strong>${s.name}</strong> (${s.year}) &bull; Capacity: ${s.capacity}</div>`).join('');
-                resolve({ text: `We have ${CARNIVAL_API.ships.length} incredible ships in our fleet:`, html: results });
-            } else if (lower.includes('destin') || lower.includes('where') || lower.includes('go')) {
-                const results = CARNIVAL_API.destinations.map(d => `<div class="card-ref"><strong>${d.name}</strong> &bull; ${d.price}</div>`).join('');
-                resolve({ text: `We sail to these amazing destinations:`, html: results });
-            } else if (lower.includes('deal') || lower.includes('offer') || lower.includes('sale') || lower.includes('discount')) {
-                const results = CARNIVAL_API.deals.map(d => `<div class="card-ref"><strong>${d.name}</strong> &bull; ${d.price} <s>${d.original}</s></div>`).join('');
-                resolve({ text: `Here are our current hot deals:`, html: results });
-            } else if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) {
-                const results = CARNIVAL_API.destinations.map(d => `<div class="card-ref"><strong>${d.name}</strong> &bull; Starting at ${d.price}</div>`).join('');
-                resolve({ text: `Prices vary by destination and season. Here are starting prices:`, html: results + `<br><em>Call 1-800-CARNIVAL for personalized quotes!</em>` });
-            } else if (lower.includes('book') || lower.includes('reserve') || lower.includes('reservation')) {
-                resolve({ text: `To book a cruise, call 1-800-CARNIVAL or visit our website. Want me to check availability for a specific destination and date?` });
-            } else if (lower.includes('hello') || lower.includes('hi ') || lower.includes('hey')) {
-                resolve({ text: `Ahoy! Welcome aboard! I can help you find cruises, check prices, explore ships, or answer any questions. What would you like to know?` });
-            } else if (lower.includes('food') || lower.includes('dining') || lower.includes('restaurant') || lower.includes('eat')) {
-                resolve({ text: `Carnival offers over 20 dining options! From Guy Fieri's Burger Joint to Bonsai Sushi, the Chef's Table, and 24/0 room service. Buffets, steakhouses, and casual spots too.` });
-            } else if (lower.includes('entertain') || lower.includes('show') || lower.includes('fun')) {
-                resolve({ text: `Get ready for Broadway-caliber shows, comedy clubs, live music, trivia, casinos, and the famous Carnival WaterWorks! There's non-stop fun for all ages.` });
-            } else if (lower.includes('kid') || lower.includes('family') || lower.includes('child') || lower.includes('camp')) {
-                resolve({ text: `Camp Ocean (2-11), Circle "C" (12-14), and Club O2 (15-17) keep kids entertained with supervised activities. Family-friendly shows, pools, and water parks too!` });
-            } else if (lower.includes('alaska') || lower.includes('glacier')) {
-                resolve({ text: `Alaska cruises start at $549. You'll see towering glaciers, whales, bald eagles, and visit ports like Juneau, Skagway, and Ketchikan. Best time: May-September.` });
-            } else if (lower.includes('caribbean') || lower.includes('bahamas')) {
-                resolve({ text: `Caribbean & Bahamas cruises start at $299. White sand beaches, crystal waters, private islands, and vibrant culture. 3-7 day itineraries available year-round!` });
-            } else if (lower.includes('europe') || lower.includes('mediterranean')) {
-                resolve({ text: `European cruises start at $799. Explore historic ports in Italy, Greece, Spain, and France. Rich culture, amazing food, and ancient landmarks await!` });
-            } else if (lower.includes('mexico') || lower.includes('riviera')) {
-                resolve({ text: `Mexican Riviera cruises start at $279. Visit Cozumel, Costa Maya, and Cabo. Snorkeling, ancient ruins, and vibrant culture.` });
-            } else if (lower.includes('thank')) {
-                resolve({ text: `You're welcome! Have a fantastic day, and we hope to see you onboard soon! &#9875;` });
-            } else if (lower.includes('help') || lower.includes('what can you')) {
-                resolve({ text: `I can help with:<br>&bull; &#128205; Destination info & pricing<br>&bull; &#9973; Ship details & features<br>&bull; &#127881; Current deals & offers<br>&bull; &#127860; Onboard dining & entertainment<br>&bull; &#128222; Booking assistance<br><br>Just ask me anything!` });
-            } else {
-                resolve({ text: `I'm not sure about that. Try asking about destinations, ships, pricing, deals, or onboard activities! Or call 1-800-CARNIVAL for more help.` });
-            }
-        }, 700);
+        const lower = intent.toLowerCase();
+        if (lower.includes('ship') || lower.includes('vessel')) {
+            const results = ELEVATOR_AI.ships.map(s => `<div class="card-ref"><strong>${s.name}</strong> (${s.year}) &bull; Capacity: ${s.capacity}</div>`).join('');
+            resolve({ text: `We have ${ELEVATOR_AI.ships.length} incredible ships in our fleet:`, html: results });
+        } else if (lower.includes('destin') || lower.includes('where') || lower.includes('go')) {
+            const results = ELEVATOR_AI.destinations.map(d => `<div class="card-ref"><strong>${d.name}</strong> &bull; ${d.price}</div>`).join('');
+            resolve({ text: `We sail to these amazing destinations:`, html: results });
+        } else if (lower.includes('deal') || lower.includes('offer') || lower.includes('sale') || lower.includes('discount')) {
+            const results = ELEVATOR_AI.deals.map(d => `<div class="card-ref"><strong>${d.name}</strong> &bull; ${d.price} <s>${d.original}</s></div>`).join('');
+            resolve({ text: `Here are our current hot deals:`, html: results });
+        } else if (lower.includes('price') || lower.includes('cost') || lower.includes('how much')) {
+            const results = ELEVATOR_AI.destinations.map(d => `<div class="card-ref"><strong>${d.name}</strong> &bull; Starting at ${d.price}</div>`).join('');
+            resolve({ text: `Prices vary by destination and season. Here are starting prices:`, html: results + `<br><em>Call 1-800-CARNIVAL for personalized quotes!</em>` });
+        } else if (lower.includes('book') || lower.includes('reserve') || lower.includes('reservation')) {
+            resolve({ text: `To book a cruise, call 1-800-CARNIVAL or visit our website. Want me to check availability for a specific destination and date?` });
+        } else if (lower.includes('hello') || lower.includes('hi ') || lower === 'hi' || lower.includes('hey')) {
+            resolve({ text: `Ahoy! Welcome aboard! I can help you find cruises, check prices, explore ships, or answer any questions. What would you like to know?` });
+        } else if (lower.includes('food') || lower.includes('dining') || lower.includes('restaurant') || lower.includes('eat')) {
+            resolve({ text: `Carnival offers over 20 dining options! From Guy Fieri's Burger Joint to Bonsai Sushi, the Chef's Table, and 24/7 room service. Buffets, steakhouses, and casual spots too.` });
+        } else if (lower.includes('entertain') || lower.includes('show') || lower.includes('fun')) {
+            resolve({ text: `Get ready for Broadway-caliber shows, comedy clubs, live music, trivia, casinos, and the famous Carnival WaterWorks! There's non-stop fun for all ages.` });
+        } else if (lower.includes('kid') || lower.includes('family') || lower.includes('child') || lower.includes('camp')) {
+            resolve({ text: `Camp Ocean (2-11), Circle "C" (12-14), and Club O2 (15-17) keep kids entertained with supervised activities. Family-friendly shows, pools, and water parks too!` });
+        } else if (lower.includes('alaska') || lower.includes('glacier')) {
+            resolve({ text: `Alaska cruises start at $549. You'll see towering glaciers, whales, bald eagles, and visit ports like Juneau, Skagway, and Ketchikan. Best time: May-September.` });
+        } else if (lower.includes('caribbean') || lower.includes('bahamas')) {
+            resolve({ text: `Caribbean & Bahamas cruises start at $299. White sand beaches, crystal waters, private islands, and vibrant culture. 3-7 day itineraries available year-round!` });
+        } else if (lower.includes('europe') || lower.includes('mediterranean')) {
+            resolve({ text: `European cruises start at $799. Explore historic ports in Italy, Greece, Spain, and France. Rich culture, amazing food, and ancient landmarks await!` });
+        } else if (lower.includes('mexico') || lower.includes('riviera')) {
+            resolve({ text: `Mexican Riviera cruises start at $279. Visit Cozumel, Costa Maya, and Cabo. Snorkeling, ancient ruins, and vibrant culture.` });
+        } else if (lower.includes('thank')) {
+            resolve({ text: `You're welcome! Have a fantastic day, and we hope to see you onboard soon! ⚓` });
+        } else if (lower.includes('help') || lower.includes('what can you')) {
+            resolve({ text: `I can help with:<br>&bull; 📌 Destination info & pricing<br>&bull; 🚢 Ship details & features<br>&bull; 🎉 Current deals & offers<br>&bull; 🍽️ Onboard dining & entertainment<br>&bull; 📞 Booking assistance<br><br>Just ask me anything!` });
+        } else {
+            resolve({ text: `I'm not sure about that. Try asking about destinations, ships, pricing, deals, or onboard activities! Or call 1-800-CARNIVAL for more help.` });
+        }
     });
 }
 
@@ -314,14 +329,16 @@ const chatClose = document.getElementById('chat-close');
 const chatMessages = document.getElementById('chat-messages');
 const chatInput = document.getElementById('chat-input');
 const chatSend = document.getElementById('chat-send');
-const chatTyping = document.getElementById('chat-typing');
 
-chatBtn.addEventListener('click', () => {
+function openChat() {
     chatWindow.classList.add('open');
     chatBtn.classList.add('hidden');
     chatInput.focus();
     chatMessages.scrollTop = chatMessages.scrollHeight;
-});
+}
+
+chatBtn.addEventListener('click', openChat);
+document.getElementById('hero-chat').addEventListener('click', openChat);
 
 chatClose.addEventListener('click', () => {
     chatWindow.classList.remove('open');
@@ -334,25 +351,24 @@ function addMessage(text, sender) {
     div.innerHTML = text;
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div;
 }
 
 function showTyping() {
-    chatTyping.classList.add('show');
+    const div = document.createElement('div');
+    div.className = 'msg bot';
+    div.textContent = 'Elevator AI is typing...';
+    chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function hideTyping() {
-    chatTyping.classList.remove('show');
+    return div;
 }
 
 async function handleUserMessage(message) {
     addMessage(message, 'user');
     chatInput.value = '';
-    showTyping();
-
-    const response = await callCarnivalAPI(message);
-    hideTyping();
-
+    const typing = showTyping();
+    const response = await callElevatorAI(message);
+    typing.remove();
     if (response.html) {
         addMessage(response.text + response.html, 'bot');
     } else {
