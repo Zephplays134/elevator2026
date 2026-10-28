@@ -4,51 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carnival Cruise Line | Fun for Everyone</title>
+    <meta name="description" content="Explore breathtaking destinations, world-class dining, and non-stop entertainment, with the Elevator AI assistant onboard.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="header">
         <div class="container header-inner">
-            <div class="logo">
-                <span class="logo-icon">&#9875;</span>
-                <span class="logo-text">Carnival Cruise</span>
-            </div>
+            <a href="#home" class="logo">
+                <span class="logo-icon">⚓</span>
+                <span class="logo-text">Carnival</span>
+            </a>
             <nav class="nav" id="nav-menu">
-                <a href="#home">Home</a>
                 <a href="#destinations">Destinations</a>
                 <a href="#deals">Deals</a>
                 <a href="#onboard">Onboard</a>
-                <a href="#updates">Elevator AI</a>
+                <a href="#updates" class="nav-highlight">Elevator AI</a>
                 <a href="#contact">Contact</a>
             </nav>
-            <button class="hamburger" id="hamburger">&#9776;</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
         </div>
     </header>
 
     <!-- Hero -->
     <section class="hero" id="home">
-        <div class="hero-slides" id="hero-slides">
+        <div class="hero-slides">
             <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1600')"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581579186913-45ac3e6e6c7b?w=1600')"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=1600')"></div>
         </div>
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <h1>Choose Fun. Choose Carnival.</h1>
-            <p>Explore breathtaking destinations, world-class dining, and non-stop entertainment.</p>
-            <a href="#deals" class="btn btn-primary">View Deals</a>
+            <span class="hero-eyebrow">2026 sailing season</span>
+            <h1>Choose Fun.<br><span class="gradient-text">Choose Carnival.</span></h1>
+            <p>Breathtaking destinations, world-class dining, and non-stop entertainment. Ask the Elevator AI assistant anything, right here on the page.</p>
+            <div class="hero-actions">
+                <a href="#deals" class="btn btn-primary">View Deals</a>
+                <button class="btn btn-ghost" id="hero-chat">Chat with Elevator AI</button>
+            </div>
         </div>
-        <button class="hero-arrow hero-arrow-left" id="hero-prev">&#10094;</button>
-        <button class="hero-arrow hero-arrow-right" id="hero-next">&#10095;</button>
+        <div class="hero-dots" id="hero-dots"></div>
     </section>
 
     <!-- Search Bar -->
     <section class="search-bar">
         <div class="container search-form">
             <div class="search-group">
-                <label>Destination</label>
+                <label for="destination">Destination</label>
                 <select id="destination">
                     <option>Caribbean</option>
                     <option>Bahamas</option>
@@ -58,11 +61,11 @@
                 </select>
             </div>
             <div class="search-group">
-                <label>Departure</label>
+                <label for="departure">Departure</label>
                 <input type="date" id="departure">
             </div>
             <div class="search-group">
-                <label>Duration</label>
+                <label for="duration">Duration</label>
                 <select id="duration">
                     <option>3-5 Days</option>
                     <option>6-9 Days</option>
@@ -76,8 +79,11 @@
     <!-- Destinations -->
     <section class="section" id="destinations">
         <div class="container">
-            <h2 class="section-title">Popular Destinations</h2>
-            <p class="section-sub">Set sail to the world's most incredible places.</p>
+            <div class="section-head">
+                <span class="eyebrow">Where we sail</span>
+                <h2 class="section-title">Popular Destinations</h2>
+                <p class="section-sub">Set sail to the world's most incredible places.</p>
+            </div>
             <div class="cards" id="dest-cards"></div>
         </div>
     </section>
@@ -85,8 +91,11 @@
     <!-- Deals -->
     <section class="section deals" id="deals">
         <div class="container">
-            <h2 class="section-title">Current Deals</h2>
-            <p class="section-sub">Limited-time offers you don't want to miss.</p>
+            <div class="section-head">
+                <span class="eyebrow">Save big</span>
+                <h2 class="section-title">Current Deals</h2>
+                <p class="section-sub">Limited-time offers you don't want to miss.</p>
+            </div>
             <div class="cards" id="deals-cards"></div>
         </div>
     </section>
@@ -94,27 +103,30 @@
     <!-- Onboard -->
     <section class="section" id="onboard">
         <div class="container">
-            <h2 class="section-title">Life Onboard</h2>
-            <p class="section-sub">From gourmet dining to Broadway-style shows.</p>
+            <div class="section-head">
+                <span class="eyebrow">Life at sea</span>
+                <h2 class="section-title">Life Onboard</h2>
+                <p class="section-sub">From gourmet dining to Broadway-style shows.</p>
+            </div>
             <div class="features">
-                <div class="feature">
-                    <span class="feature-icon">&#127860;</span>
+                <div class="feature reveal">
+                    <span class="feature-icon">🍽️</span>
                     <h3>World-Class Dining</h3>
                     <p>20+ restaurants from casual to fine dining.</p>
                 </div>
-                <div class="feature">
-                    <span class="feature-icon">&#127916;</span>
+                <div class="feature reveal">
+                    <span class="feature-icon">🎭</span>
                     <h3>Entertainment</h3>
                     <p>Broadway shows, comedy clubs, and live music.</p>
                 </div>
-                <div class="feature">
-                    <span class="feature-icon">&#127754;</span>
-                    <h3>Pools & Water Parks</h3>
+                <div class="feature reveal">
+                    <span class="feature-icon">🏄</span>
+                    <h3>Pools &amp; Water Parks</h3>
                     <p>Massive water parks with slides for all ages.</p>
                 </div>
-                <div class="feature">
-                    <span class="feature-icon">&#127979;</span>
-                    <h3>Spas & Fitness</h3>
+                <div class="feature reveal">
+                    <span class="feature-icon">🧖</span>
+                    <h3>Spas &amp; Fitness</h3>
                     <p>Relax at the spa or stay active at the gym.</p>
                 </div>
             </div>
@@ -124,20 +136,23 @@
     <!-- Elevator AI Updates -->
     <section class="section deals" id="updates">
         <div class="container">
-            <h2 class="section-title">Elevator AI Updates</h2>
-            <p class="section-sub">What's new with the Elevator AI model, built into this site.</p>
+            <div class="section-head">
+                <span class="eyebrow">The assistant</span>
+                <h2 class="section-title">Elevator AI Updates</h2>
+                <p class="section-sub">What's new with the Elevator AI model, built into this site.</p>
+            </div>
             <div class="ai-badges">
-                <span class="badge">Real-time</span>
-                <span class="badge">Keyless</span>
-                <span class="badge">Fully free</span>
-                <span class="badge">Unlimited</span>
-                <span class="badge">Reliable</span>
+                <span class="badge">⚡ Real-time</span>
+                <span class="badge">🔑 Keyless</span>
+                <span class="badge">💛 Fully free</span>
+                <span class="badge">∞ Unlimited</span>
+                <span class="badge">🛡️ Reliable</span>
             </div>
             <ul class="update-log">
-                <li><strong>Oct 28, 2026</strong> &mdash; Elevator AI is real-time, keyless, fully free, unlimited, and reliable: instant answers, no API key, no sign-up, no usage limits, no downtime to worry about.</li>
-                <li><strong>Oct 28, 2026</strong> &mdash; Auto-update monitor added. The site now tells visitors when a new version is live, with one-tap refresh.</li>
-                <li><strong>July 2026</strong> &mdash; Launched the Elevator AI assistant: instant answers on ships, destinations, deals, dining, and booking.</li>
-                <li><strong>July 2026</strong> &mdash; Site launched: destinations, current deals, life onboard, and guest testimonials.</li>
+                <li class="reveal"><strong>Oct 28, 2026</strong> &mdash; Elevator AI is real-time, keyless, fully free, unlimited, and reliable: instant answers, no API key, no sign-up, no usage limits, no downtime to worry about.</li>
+                <li class="reveal"><strong>Oct 28, 2026</strong> &mdash; Auto-update monitor added. The site now tells visitors when a new version is live, with one-tap refresh.</li>
+                <li class="reveal"><strong>July 2026</strong> &mdash; Launched the Elevator AI assistant: instant answers on ships, destinations, deals, dining, and booking.</li>
+                <li class="reveal"><strong>July 2026</strong> &mdash; Site launched: destinations, current deals, life onboard, and guest testimonials.</li>
             </ul>
         </div>
     </section>
@@ -145,19 +160,22 @@
     <!-- Testimonials -->
     <section class="section testimonials">
         <div class="container">
-            <h2 class="section-title">What Our Guests Say</h2>
+            <div class="section-head">
+                <span class="eyebrow gold">Guest stories</span>
+                <h2 class="section-title">What Our Guests Say</h2>
+            </div>
             <div class="testimonial-slider" id="testimonial-slider">
                 <div class="testimonial active">
                     <p>"The best vacation we've ever had! The kids loved it and so did we."</p>
-                    <h4>- Sarah & Family</h4>
+                    <h4>Sarah &amp; Family</h4>
                 </div>
                 <div class="testimonial">
                     <p>"Unbelievable service, amazing food, and breathtaking views. Can't wait to go again!"</p>
-                    <h4>- Mike R.</h4>
+                    <h4>Mike R.</h4>
                 </div>
                 <div class="testimonial">
                     <p>"From the moment we stepped onboard, everything was perfect. Truly a floating paradise."</p>
-                    <h4>- Jessica T.</h4>
+                    <h4>Jessica T.</h4>
                 </div>
             </div>
             <div class="testimonial-dots" id="testimonial-dots"></div>
@@ -173,7 +191,7 @@
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
-                <a href="#">Book a Cruise</a>
+                <a href="#deals">Book a Cruise</a>
                 <a href="#">Manage Booking</a>
                 <a href="#">Check-In</a>
                 <a href="#">Gift Cards</a>
@@ -193,35 +211,45 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Carnival Cruise Line. All rights reserved.</p>
+            <p>&copy; 2026 Carnival Cruise Line. All rights reserved. Independent fan-made page, not affiliated with Carnival Corporation.</p>
         </div>
     </footer>
 
     <!-- Chatbot -->
-    <button class="chat-btn" id="chat-btn">&#128172;</button>
+    <button class="chat-btn" id="chat-btn" aria-label="Open chat">💬</button>
 
     <div class="chat-window" id="chat-window">
         <div class="chat-header">
-            <span>&#9875; Carnival Assistant</span>
-            <button id="chat-close">&times;</button>
+            <div class="chat-header-id">
+                <span class="chat-avatar">⚓</span>
+                <div>
+                    <span class="chat-name">Elevator AI</span>
+                    <span class="chat-status">Online · real-time</span>
+                </div>
+            </div>
+            <button id="chat-close" aria-label="Close chat">&times;</button>
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="msg bot">
-                Hi! I'm your Carnival Cruise assistant. Ask me about destinations, pricing, onboard activities, or booking!
+                Ahoy! I'm <strong>Elevator AI</strong>, your cruise assistant. Ask me about destinations, pricing, onboard activities, or booking!
+                <div class="quick-replies">
+                    <span class="quick-reply">Show deals</span>
+                    <span class="quick-reply">Ship info</span>
+                    <span class="quick-reply">Dining options</span>
+                </div>
             </div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
-            <button id="chat-send">&#10148;</button>
+            <input type="text" id="chat-input" placeholder="Ask Elevator AI anything..." autocomplete="off">
+            <button id="chat-send" aria-label="Send">➤</button>
         </div>
-        <div class="chat-typing" id="chat-typing">Carnival AI is thinking...</div>
     </div>
 
     <!-- Auto-Update Banner -->
     <div class="update-banner" id="update-banner">
-        <p id="update-msg">&#128260; Update available for <strong>elevator2026</strong>!</p>
+        <p id="update-msg">🔄 Update available for <strong>elevator2026</strong>!</p>
         <button class="btn-small" id="update-refresh">Refresh</button>
-        <button class="btn-close" id="update-close">&times;</button>
+        <button class="btn-close" id="update-close" aria-label="Dismiss">&times;</button>
     </div>
 
     <script src="script.js"></script>
