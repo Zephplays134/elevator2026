@@ -740,6 +740,49 @@ body {
     }
 }
 
+/* Elevator AI Updates */
+.ai-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: -20px 0 30px;
+}
+
+.badge {
+    background: #fff;
+    color: #003087;
+    border: 2px solid #003087;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.update-log {
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    gap: 12px;
+}
+
+.update-log li {
+    background: #fff;
+    border-left: 4px solid #003087;
+    border-radius: 8px;
+    padding: 14px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.update-log li:first-child {
+    border-left-color: #e74c3c;
+}
+
+.update-log strong {
+    color: #003087;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav {
